@@ -1,0 +1,42 @@
+{
+  "name": "Solflare X NFT",
+  "symbol": "",
+  "description": "Celebratory Solflare NFT for the Solflare X launch",
+  "seller_fee_basis_points": 0,
+  "image": "https://gateway.pinata.cloud/ipfs/QmWKJrTGsPwNris3u4LZxT3dTz4RGKTiAEjci5FxAqobJ6",
+  "animation_url": "",
+  "external_url": "https://crypunks.com",
+  "attributes": [
+    {
+      "trait_type": "web",
+      "value": "yes"
+    },
+    {
+      "trait_type": "mobile",
+      "value": "yes"
+    },
+    {
+      "trait_type": "extension",
+      "value": "yes"
+    }
+  ],
+  "collection": {
+    "name": "CRYPUNKS",
+    "family": "CRYPUNKS"
+  },
+  "properties": {
+    "files": [
+      {
+        "uri": "https://www.arweave.net/abcd5678?ext=png",
+        "type": "image/png"
+      }
+    ],
+    "category": "image",
+    "creators": [
+      {
+        "address": "FfLczWEt8wYoubArWX6iTKJ85inoKinvovzJ4CqRRuzX",
+        "share": 100
+      }
+    ]
+  }
+}

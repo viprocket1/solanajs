@@ -9,6 +9,9 @@ const wallet = new PublicKey("FfLczWEt8wYoubArWX6iTKJ85inoKinvovzJ4CqRRuzX");
 
 async function main() {
   // 1. you can fetch all token account by an owner
+
+  let sol_balance = await connection.getBalance(wallet);
+  console.log(`Sol balance: ${sol_balance / 10000000}`);
   let response = await connection.getTokenAccountsByOwner(
     wallet, // owner here
     {
