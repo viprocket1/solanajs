@@ -4,6 +4,7 @@ const {
   LAMPORTS_PER_SOL,
   clusterApiUrl,
   Account,
+  PublicKey,
 } = require("@solana/web3.js");
 const bip39 = require("bip39");
 const bs58 = require("bs58");
@@ -21,7 +22,7 @@ connection.onAccountChange(
 
 //mnemonic to seed
 const trial_mnemonic =
-  "empower palace cable dwarf scheme beach city into today ranch onion tumble battle abandon honey deal tide venue prepare dismiss sand auto prize goddess";
+  "civil output ginger faith task mix high winter point feel limit guilt";
 
 //convert
 
@@ -31,7 +32,7 @@ async function mnemonicToSeed(mnemonic) {
     throw new Error("Invalid seed words");
   }
   const seed = await bip39.mnemonicToSeed(mnemonic);
-  console.log(Buffer.from(seed).toString("hex"));
+  //console.log(Buffer.from(seed).toString("hex"));
   return Buffer.from(seed).toString("hex");
 }
 
@@ -93,17 +94,30 @@ const DerivationPathMenuItem = {
   Bip44Root: 3, // Ledger only.
 };
 
-for (let i = 1; i < 3; i++) {
-  mnemonicToSeed(trial_mnemonic).then((seed) => {
-    //console.log(seed);
-    [...Array(10)].map((_, idx) => {
-      console.log(
-        getAccountFromSeed(
+(async () => {
+  const seed = await mnemonicToSeed(trial_mnemonic);
+  const account = [];
+  for (let i = 1; i < 3; i++) {
+    account.push(
+      [...Array(20)].map((_, idx) => {
+        return getAccountFromSeed(
           Buffer.from(seed, "hex"),
           idx,
           toDerivationPath(i)
-        ).publicKey.toBase58()
+        );
+      })
+    );
+  }
+  for (let i = 0; i < account.length; i++) {
+    for (let j = 0; j < account[i].length; j++) {
+      console.log(
+        "public key: ",
+        account[i][j].publicKey.toBase58(),
+        " balance: ",
+        await connection.getBalance(
+          new PublicKey(account[i][j].publicKey.toBase58())
+        )
       );
-    });
-  });
-}
+    }
+  }
+})();
