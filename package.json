@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "@metaplex-foundation/mpl-token-metadata": "^1.1.0",
     "@metaplex/js": "^4.11.6",
