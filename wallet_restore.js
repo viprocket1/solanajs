@@ -1,26 +1,18 @@
-const {
+import {
   Connection,
   Keypair,
   LAMPORTS_PER_SOL,
   clusterApiUrl,
   Account,
   PublicKey,
-} = require("@solana/web3.js");
-const bip39 = require("bip39");
-const bs58 = require("bs58");
-const nacl = require("tweetnacl");
+} from "@solana/web3.js";
+import * as bip39 from "bip39";
+import bs58 from "bs58";
+import nacl from "tweetnacl";
+import { derivePath } from "ed25519-hd-key";
+
 const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
-const { derivePath } = require("ed25519-hd-key");
-const wallet = Keypair.generate();
 
-connection.onAccountChange(
-  wallet.publicKey,
-  (updatedAccountInfo, context) =>
-    console.log("Updated account info: ", updatedAccountInfo),
-  "confirmed"
-);
-
-//mnemonic to seed
 const trial_mnemonic =
   "civil output ginger faith task mix high winter point feel limit guilt";
 
@@ -37,7 +29,7 @@ async function mnemonicToSeed(mnemonic) {
 }
 
 //convert
-function getAccountFromSeed(
+export function getAccountFromSeed(
   seed,
   walletIndex,
   dPath = undefined,
@@ -47,9 +39,6 @@ function getAccountFromSeed(
   return new Account(nacl.sign.keyPair.fromSeed(derivedSeed).secretKey);
 }
 
-//print public keys
-
-//maths to derive lol
 function deriveSeed(seed, walletIndex, derivationPath, accountIndex) {
   switch (derivationPath) {
     case DERIVATION_PATH.deprecated:

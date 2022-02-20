@@ -1,13 +1,10 @@
-const { TOKEN_PROGRAM_ID } = require("@solana/spl-token");
-const { Connection, PublicKey, clusterApiUrl } = require("@solana/web3.js");
-const { AccountLayout, u64 } = require("@solana/spl-token");
-
-// get token accounts by owner
+import { TOKEN_PROGRAM_ID, AccountLayout, u64 } from "@solana/spl-token";
+import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
 
 const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
 const wallet = new PublicKey("FfLczWEt8wYoubArWX6iTKJ85inoKinvovzJ4CqRRuzX");
 
-async function main() {
+async function WalletData() {
   // 1. you can fetch all token account by an owner
 
   let sol_balance = await connection.getBalance(wallet);
@@ -42,7 +39,7 @@ async function main() {
   });
 }
 
-main().then(
+WalletData().then(
   () => process.exit(),
   (err) => {
     console.error(err);
